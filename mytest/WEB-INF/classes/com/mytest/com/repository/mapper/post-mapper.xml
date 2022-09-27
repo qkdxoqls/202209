@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="post">
+	<insert id="post" parameterType="post">
+		insert into post (p_no, p_title ,p_writer, p_date, p_contents, p_hits, p_filename)
+			values (#{p_no}, #{p_title}, #{p_writer}, now(), #{p_contents}, #{p_hits}, #{p_filename})
+	</insert>
+	<select id="findAll" resultType="post">
+		select * from post order by p_no desc
+	</select>
+	<select id="findById" parameterType="long" resultType="post">
+		select * from post where p_no=#{p_no}
+	</select>
+	<update id="hits" parameterType="long">
+		update post set p_hits=p_hits+1 where p_no=#{p_no}
+	</update>
+	<delete id="delete" parameterType="long">
+ 		delete from post where p_no=#{p_no}
+ 	</delete>
+ 	
+</mapper>

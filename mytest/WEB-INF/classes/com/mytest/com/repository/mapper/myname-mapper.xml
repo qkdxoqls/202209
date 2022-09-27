@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="myname">
+
+	<insert id="insert" parameterType="myname">
+		insert into myname (username, userid, userpassword, userage, nation, usersex, hobby, job, userbrt, userdate, my_filename,usermoney)
+			values(#{username}, #{userid}, #{userpassword}, #{userage}, #{nation}, #{usersex}, #{hobby}, #{job}, #{userbrt}, now(), #{my_filename},#{usermoney})
+	</insert>
+	
+	<select id="login" resultType="myname">
+		select * from myname where userid=#{userid} and userpassword=#{userpassword}
+	</select>
+	
+	<select id="findAll" resultType="myname">
+		select * from myname order by my_no desc
+	</select>
+	<select id="findById" parameterType="long" resultType="myname">
+ 		select * from myname where my_no=#{my_no}
+ 	</select> 
+ 	<delete id="delete" parameterType="long">
+ 		delete from myname where my_no=#{my_no}
+ 	</delete>
+ 	<update id="usermoney" parameterType="long">
+	 	update myname set usermoney=usermoney+100000 where my_no=#{my_no}
+ 	</update>
+</mapper>

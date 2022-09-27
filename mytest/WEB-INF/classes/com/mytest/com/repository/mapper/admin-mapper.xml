@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="admin">
+	<insert id="adminpost" parameterType="admin">
+		insert into adminpost (a_no, a_writer, a_title, a_date, a_contents, a_hits, a_filename)
+			values(#{a_no}, #{a_writer}, #{a_title}, now(), #{a_contents}, #{a_hits}, #{a_filename})
+	</insert>
+	<select id="page3" resultType="admin">
+		select * from adminpost order by a_no desc
+	</select>
+	<select id="findById" parameterType="long" resultType="admin">
+		select * from adminpost where a_no=#{a_no}
+	</select>
+	<delete id="delete" parameterType="long">
+ 		delete from adminpost where a_no=#{a_no}
+ 	</delete>
+ 	<update id="a_hits" parameterType="long">
+		update adminpost set a_hits=a_hits+1 where a_no=#{a_no}
+	</update>
+</mapper>
